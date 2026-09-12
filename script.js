@@ -134,13 +134,13 @@
     if(stepPaymentLines[2] && stepPaymentLines[2].firstChild) stepPaymentLines[2].firstChild.nodeValue = dictionary.recipientLabel + ' : ';
     const placeholders = language === 'en' ? {
       fullname: 'e.g. BOGNON Dona Gracias Yeratel',
-      classification: 'e.g. Student, Professional, Entrepreneur…',
+      classification: 'e.g. Web developer, Lawyer, Doctor, Student…',
       clubName: 'e.g. Rotaract Club of Cotonou',
       email: 'you@example.com',
       motivation: 'Why would you like to attend this workshop?'
     } : {
       fullname: 'Ex : BOGNON Dona Gracias Yeratel',
-      classification: 'Ex : Étudiant(e), Professionnel(le), Entrepreneur(se)…',
+      classification: 'Ex : Développeur web, Juriste, Médecin, Étudiant(e)…',
       clubName: 'Ex : Rotaract Club de Cotonou',
       email: 'vous@exemple.com',
       motivation: 'Pourquoi souhaitez-vous participer à cet atelier ?'
