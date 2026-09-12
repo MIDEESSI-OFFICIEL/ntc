@@ -39,11 +39,24 @@
   const paymentConfirmedInput = document.getElementById('paymentConfirmed');
   const paymentContinueBtn = document.getElementById('paymentContinue');
   const stepCaption = document.getElementById('stepCaption');
-  const classificationInput = document.getElementById('classification');
   const clubField = document.getElementById('clubField');
   const clubNameInput = document.getElementById('clubName');
-  const otherField = document.getElementById('otherField');
-  const otherProfileInput = document.getElementById('otherProfile');
+  const clubMemberRadios = document.querySelectorAll('input[name="clubMember"]');
+
+  function updateClubField(){
+    const selected = document.querySelector('input[name="clubMember"]:checked');
+    const isYes = selected && selected.value === 'oui';
+    clubField.hidden = !isYes;
+    clubNameInput.required = isYes;
+    if(!isYes){
+      clubNameInput.value = '';
+      clearError('clubName');
+    }
+  }
+
+  clubMemberRadios.forEach(r => r.addEventListener('change', updateClubField));
+  updateClubField();
+
   const stepCaptions = {
     1: 'Vos informations personnelles',
     2: 'Votre motivation et les modalités de paiement',
@@ -62,22 +75,22 @@
 
   const translations = {
     fr: {
-      pageTitle: 'Nautile Academy | Atelier de formation à Cotonou', pageDescription: 'Inscription au premier atelier de Nautile Academy, le programme de formation du Club Rotaract Satellite de Cotonou — Le Nautile Connect.', tagline: 'Nautile Academy', heroTitle: 'Premier <span>atelier</span> de formation',
+      pageTitle: 'Nautile Academy 1 | Création de contenu — Cotonou', pageDescription: 'Inscription à La Nautile Academy 1 : Création de contenu (Photo, Cadrage & Montage) — le 14 Novembre 2026 à Fidrosse, Escale des Pêcheurs, Cotonou.', tagline: 'Nautile Academy 1', heroTitle: 'Création de <span>contenu</span>',
       introOne: 'Nautile Academy est le programme de formation du Club Rotaract Satellite de Cotonou « Le Nautile Connect ». Il accompagne les jeunes de Cotonou dans l\'acquisition de compétences concrètes, portées par l\'esprit de service et de connexion qui anime le club.',
-      introTwo: 'Ce premier atelier ouvre le cycle de formations. Les places sont limitées : l\'inscription se fait en remplissant la fiche ci-contre et en réglant les frais de participation.',
+      introTwo: 'Ce premier atelier porte sur la <strong>création de contenu</strong> : Photo, Cadrage & Montage. Les places sont limitées : l\'inscription se fait en remplissant la fiche ci-contre et en réglant les frais de participation.',
       howTitle: 'Comment ça se passe', howRegistration: '<b>Inscription</b> — vous complétez la fiche avec vos coordonnées et votre motivation.',
       howPayment: '<b>Paiement</b> — vous réglez les frais de participation au contact indiqué ci-dessous.', howProof: '<b>Preuve</b> — vous joignez une capture ou une photo du reçu de paiement au formulaire.', howConfirmation: '<b>Confirmation</b> — votre place est validée dès réception de votre fiche complète.',
       feeLabel: 'Frais de participation', payTo: 'À verser au', amountLabel: 'Montant à régler', recipientLabel: 'Nom du destinataire', register: 'M\'inscrire', feedbackLink: 'Une suggestion ou un problème ? Écrivez-nous', formTitle: 'Fiche d\'inscription', stepOneCaption: 'Vos informations personnelles', backOverview: '← Retour à la présentation', back: 'Retour', continue: 'Continuer', selectProfile: 'Sélectionnez votre profil', student: 'Élève', universityStudent: 'Étudiant(e)', professional: 'Professionnel(le) en activité', entrepreneur: 'Entrepreneur(se)', rotaryMember: 'Membre Rotaract / Rotary', other: 'Autre', proofLabel: 'Preuve de paiement <span style="color:var(--ink-soft); font-weight:400;">(optionnel)</span>', uploadMain: 'Cliquez ou déposez votre reçu ici', uploadSub: 'Image (JPG, PNG) ou PDF — 5 Mo maximum', removeFile: 'Retirer', proofHint: 'Si vous avez déjà réglé au 01 62 61 76 27, joignez la capture du reçu ici — sinon vous pourrez l\'envoyer plus tard via WhatsApp.', formNote: 'Vos données sont transmises de façon sécurisée à l\'organisation.', successTitle: 'Fiche prête à être envoyée', successText: 'Votre inscription est complète. Transmettez-la au Nautile Academy par WhatsApp en joignant votre preuve de paiement.', sendWhatsApp: 'Envoyer via WhatsApp', newForm: 'Remplir une nouvelle fiche', meetingLabel: 'Le rendez-vous', locationTitle: 'Retrouvez-nous facilement', openMaps: 'Ouvrir dans Google Maps ↗', supportLabel: 'Avec le soutien de', partnersTitle: 'Nos partenaires', socialLabel: 'La communauté continue en ligne', socialTitle: 'Suivez-nous', paymentLabel: 'Paiement', contactLabel: 'Contact', copyright: '© 2026 Club Rotaract Satellite de Cotonou — Le Nautile Connect. Tous droits réservés.', developer: 'Site développé par <a class="developer-link" href="https://mideessi.com" target="_blank" rel="noopener">MIDEESSI TECH SARL</a>.',
-      fullnameLabel: 'Noms et prénoms <span class="req">*</span>', classificationLabel: 'Classification <span class="req">*</span>', clubLabel: 'Nom de votre club <span class="req">*</span>', emailLabel: 'Adresse e-mail <span class="req">*</span>', whatsappLabel: 'Numéro WhatsApp <span class="req">*</span>', motivationLabel: 'Motivations pour la formation <span class="req">*</span>', paymentConsent: 'J\'ai pris connaissance des modalités de paiement.', submit: 'Envoyer mon inscription', stepOne: 'Coordonnées', stepTwo: 'Motivation & paiement', stepThree: 'Preuve'
+      fullnameLabel: 'Noms et prénoms <span class="req">*</span>', classificationLabel: 'Classification <span class="req">*</span>', clubMemberLabel: 'Faites-vous partie d\'un club ?', clubLabel: 'Nom du club <span class="req">*</span>', yes: 'Oui', no: 'Non', emailLabel: 'Adresse e-mail <span class="req">*</span>', whatsappLabel: 'Numéro WhatsApp <span class="req">*</span>', motivationLabel: 'Motivations pour la formation <span class="req">*</span>', paymentConsent: 'J\'ai pris connaissance des modalités de paiement.', submit: 'Envoyer mon inscription', stepOne: 'Coordonnées', stepTwo: 'Motivation & paiement', stepThree: 'Preuve'
     },
     en: {
-      pageTitle: 'Nautile Academy | Training workshop in Cotonou', pageDescription: 'Register for the first Nautile Academy workshop, the training program of the Rotaract Club of Cotonou Satellite — Le Nautile Connect.', tagline: 'Nautile Academy', heroTitle: 'First training workshop',
+      pageTitle: 'Nautile Academy 1 | Content Creation — Cotonou', pageDescription: 'Register for Nautile Academy 1: Content Creation (Photo, Framing & Editing) — November 7, 2026 at Fidrosse, Escale des Pêcheurs, Cotonou.', tagline: 'Nautile Academy 1', heroTitle: 'Content <span>Creation</span>',
       introOne: 'Nautile Academy is the training program of the Rotaract Club of Cotonou Satellite — Le Nautile Connect. It helps young people in Cotonou build practical skills through service and connection.',
-      introTwo: 'This first workshop opens the training cycle. Places are limited: register by completing the form and paying the participation fee.',
+      introTwo: 'This first workshop focuses on <strong>content creation</strong>: Photo, Framing & Editing. Places are limited: register by completing the form and paying the participation fee.',
       howTitle: 'How it works', howRegistration: '<b>Registration</b> — complete the form with your details and motivation.',
       howPayment: '<b>Payment</b> — pay the participation fee using the contact below.', howProof: '<b>Proof</b> — attach a screenshot or photo of your payment receipt.', howConfirmation: '<b>Confirmation</b> — your place is confirmed once your complete form is received.',
       feeLabel: 'Participation fee', payTo: 'Pay to', amountLabel: 'Amount to pay', recipientLabel: 'Recipient name', register: 'Register', feedbackLink: 'Have a suggestion or a problem? Contact us', formTitle: 'Registration form', stepOneCaption: 'Your personal details', backOverview: '← Back to overview', back: 'Back', continue: 'Continue', selectProfile: 'Select your profile', student: 'Student', universityStudent: 'University student', professional: 'Working professional', entrepreneur: 'Entrepreneur', rotaryMember: 'Rotaract / Rotary member', other: 'Other', proofLabel: 'Payment proof <span style="color:var(--ink-soft); font-weight:400;">(optional)</span>', uploadMain: 'Click or drop your receipt here', uploadSub: 'Image (JPG, PNG) or PDF — 5 MB maximum', removeFile: 'Remove', proofHint: 'If you have already paid to 01 62 61 76 27, attach the receipt here — otherwise you can send it later via WhatsApp.', formNote: 'Your data is securely transmitted to the organization.', successTitle: 'Form ready to send', successText: 'Your registration is complete. Send it to Nautile Academy via WhatsApp with your payment proof.', sendWhatsApp: 'Send via WhatsApp', newForm: 'Fill out a new form', meetingLabel: 'The venue', locationTitle: 'Find us easily', openMaps: 'Open in Google Maps ↗', supportLabel: 'With the support of', partnersTitle: 'Our partners', socialLabel: 'The community continues online', socialTitle: 'Follow us', paymentLabel: 'Payment', contactLabel: 'Contact', copyright: '© 2026 Rotaract Club of Cotonou Satellite — Le Nautile Connect. All rights reserved.', developer: 'Website developed by <a class="developer-link" href="https://mideessi.com" target="_blank" rel="noopener">MIDEESSI TECH SARL</a>.',
-      fullnameLabel: 'Full name <span class="req">*</span>', classificationLabel: 'Profile <span class="req">*</span>', clubLabel: 'Club name <span class="req">*</span>', emailLabel: 'Email address <span class="req">*</span>', whatsappLabel: 'WhatsApp number <span class="req">*</span>', motivationLabel: 'Motivation for the workshop <span class="req">*</span>', paymentConsent: 'I have read and understood the payment details.', submit: 'Submit my registration', stepOne: 'Details', stepTwo: 'Motivation & payment', stepThree: 'Proof'
+      fullnameLabel: 'Full name <span class="req">*</span>', classificationLabel: 'Profile <span class="req">*</span>', clubMemberLabel: 'Are you a member of a club?', clubLabel: 'Club name <span class="req">*</span>', yes: 'Yes', no: 'No', emailLabel: 'Email address <span class="req">*</span>', whatsappLabel: 'WhatsApp number <span class="req">*</span>', motivationLabel: 'Motivation for the workshop <span class="req">*</span>', paymentConsent: 'I have read and understood the payment details.', submit: 'Submit my registration', stepOne: 'Details', stepTwo: 'Motivation & payment', stepThree: 'Proof'
     }
   };
 
@@ -94,10 +107,6 @@
       const value = dictionary[element.dataset.i18n];
       if(value) element.innerHTML = value;
     });
-    const otherProfileLabel = document.querySelector('[data-i18n="otherProfileLabel"]');
-    if(otherProfileLabel){
-      otherProfileLabel.innerHTML = language === 'en' ? 'Specify your profile <span class="req">*</span>' : 'Précisez votre profil <span class="req">*</span>';
-    }
     const footerDescription = document.querySelector('[data-i18n="footerDescription"]');
     if(footerDescription){
       footerDescription.textContent = language === 'en'
@@ -111,16 +120,16 @@
     if(stepPaymentLines[2] && stepPaymentLines[2].firstChild) stepPaymentLines[2].firstChild.nodeValue = dictionary.recipientLabel + ' : ';
     const placeholders = language === 'en' ? {
       fullname: 'e.g. BOGNON Dona Gracias Yeratel',
+      classification: 'e.g. Student, Professional, Entrepreneur…',
       clubName: 'e.g. Rotaract Club of Cotonou',
       email: 'you@example.com',
-      motivation: 'Why would you like to attend this workshop?',
-      otherProfile: 'e.g. Volunteer, association...'
+      motivation: 'Why would you like to attend this workshop?'
     } : {
       fullname: 'Ex : BOGNON Dona Gracias Yeratel',
+      classification: 'Ex : Étudiant(e), Professionnel(le), Entrepreneur(se)…',
       clubName: 'Ex : Rotaract Club de Cotonou',
       email: 'vous@exemple.com',
-      motivation: 'Pourquoi souhaitez-vous participer à cet atelier ?',
-      otherProfile: 'Ex : Bénévole, association...'
+      motivation: 'Pourquoi souhaitez-vous participer à cet atelier ?'
     };
     Object.entries(placeholders).forEach(([name, placeholder]) => {
       if(form.elements[name]) form.elements[name].placeholder = placeholder;
@@ -134,10 +143,10 @@
 
   const errorMessages = {
     fr: {
-      fullname: 'Merci d\'indiquer vos noms et prénoms.', classification: 'Merci de choisir une classification.', email: 'Adresse e-mail invalide.', whatsapp: 'Numéro WhatsApp invalide.', motivation: 'Merci d\'indiquer votre motivation.', clubName: 'Merci d\'indiquer le nom de votre club.', otherProfile: 'Merci de préciser votre profil.'
+      fullname: 'Merci d\'indiquer vos noms et prénoms.', classification: 'Merci d\'indiquer votre classification.', clubMember: 'Merci d\'indiquer si vous faites partie d\'un club.', email: 'Adresse e-mail invalide.', whatsapp: 'Numéro WhatsApp invalide.', motivation: 'Merci d\'indiquer votre motivation.', clubName: 'Merci d\'indiquer le nom de votre club.'
     },
     en: {
-      fullname: 'Please enter your full name.', classification: 'Please choose a profile.', email: 'Invalid email address.', whatsapp: 'Invalid WhatsApp number.', motivation: 'Please enter your motivation.', clubName: 'Please enter your club name.', otherProfile: 'Please specify your profile.'
+      fullname: 'Please enter your full name.', classification: 'Please enter your profile.', clubMember: 'Please indicate whether you belong to a club.', email: 'Invalid email address.', whatsapp: 'Invalid WhatsApp number.', motivation: 'Please enter your motivation.', clubName: 'Please enter your club name.'
     }
   };
 
@@ -146,25 +155,7 @@
   });
   applyLanguage(localStorage.getItem('nautile-language') || 'fr');
 
-  function updateClubField(){
-    const isRotaractMember = classificationInput.value === 'Rotaractien';
-    const isOtherProfile = classificationInput.value === 'Autre';
-    clubField.hidden = !isRotaractMember;
-    clubNameInput.required = isRotaractMember;
-    otherField.hidden = !isOtherProfile;
-    otherProfileInput.required = isOtherProfile;
-    if(!isRotaractMember){
-      clubNameInput.value = '';
-      clearError('clubName');
-    }
-    if(!isOtherProfile){
-      otherProfileInput.value = '';
-      clearError('otherProfile');
-    }
-  }
 
-  classificationInput.addEventListener('change', updateClubField);
-  updateClubField();
 
   function showCopied(copyPhoneBtn){
     const originalContent = copyPhoneBtn.innerHTML;
@@ -327,8 +318,15 @@
       ['fullname','classification','email','whatsapp'].forEach(name => {
         if(!validateField(form.elements[name])) valid = false;
       });
-      if(classificationInput.value === 'Rotaractien' && !validateField(clubNameInput)) valid = false;
-      if(classificationInput.value === 'Autre' && !validateField(otherProfileInput)) valid = false;
+      // Validate clubMember radio
+      const clubMemberSelected = document.querySelector('input[name="clubMember"]:checked');
+      if(!clubMemberSelected){
+        setError('clubMember', (errorMessages[localStorage.getItem('nautile-language') || 'fr'] || errorMessages.fr).clubMember);
+        valid = false;
+      } else {
+        clearError('clubMember');
+        if(clubMemberSelected.value === 'oui' && !validateField(clubNameInput)) valid = false;
+      }
       return valid;
     }
     if(step === 2){
@@ -435,11 +433,12 @@
     });
     if(!confirmation.isConfirmed) return;
 
+    const clubMemberSelected = document.querySelector('input[name="clubMember"]:checked');
     const data = {
       fullname: form.fullname.value.trim(),
-      classification: form.classification.options[form.classification.selectedIndex].text,
+      classification: form.classification.value.trim(),
+      clubMember: clubMemberSelected ? (clubMemberSelected.value === 'oui' ? 'Oui' : 'Non') : 'Non',
       clubName: clubNameInput.value.trim(),
-      otherProfile: otherProfileInput.value.trim(),
       email: form.email.value.trim(),
       whatsapp: phoneInput.getNumber(),
       motivation: form.motivation.value.trim()
@@ -451,14 +450,17 @@
     emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
       fullname: data.fullname,
       classification: data.classification,
-      club_name: data.clubName || 'Non concerné',
-      other_profile: data.otherProfile || 'Non concerné',
+      club_member: data.clubMember,
+      club_name: data.clubMember === 'Oui' ? data.clubName : '—',
       email: data.email,
       whatsapp: data.whatsapp,
       motivation: data.motivation,
       payment_confirmed: form.paymentConfirmed.checked ? 'Oui' : 'Non',
       payment_proof: uploadedUrl || 'Non jointe',
-      subject: 'Nouvelle inscription — Nautile Academy',
+      event_name: 'La Nautile Academy 1 — Création de contenu',
+      event_date: '14 Novembre 2026 à 09h00',
+      event_location: 'Fidrosse, Escale des Pêcheurs, Cotonou',
+      subject: 'Nouvelle inscription — Nautile Academy 1 : Création de contenu',
       reply_to: data.email
     })
     .then(() => {

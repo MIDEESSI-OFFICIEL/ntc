@@ -53,9 +53,9 @@
     },
     {
       "@type": "EducationEvent",
-      "name": "Premier atelier de formation — Nautile Academy",
-      "description": "Premier atelier de formation de Nautile Academy à Cotonou.",
-      "startDate": "2026-11-14",
+      "name": "La Nautile Academy 1 — Création de contenu",
+      "description": "Atelier de création de contenu (Photo, Cadrage & Montage) organisé par le Club Rotaract Satellite de Cotonou — Le Nautile Connect.",
+      "startDate": "2026-11-14T09:00",
       "eventStatus": "https://schema.org/EventScheduled",
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
       "organizer": {
@@ -64,7 +64,7 @@
       },
       "location": {
         "@type": "Place",
-        "name": "Cotonou, Bénin",
+        "name": "Escale des Pêcheurs, Fidrosse",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Cotonou",
@@ -73,7 +73,7 @@
       },
       "offers": {
         "@type": "Offer",
-        "price": "5125",
+        "price": "5000",
         "priceCurrency": "XOF",
         "availability": "https://schema.org/LimitedAvailability",
         "url": "./"
@@ -108,8 +108,14 @@
       <center><strong>14</strong></center>
       <small>NOV 2026</small>
     </div>
-    <p class="tagline" data-i18n="tagline">Nautile Academy</p>
-    <h1 data-i18n="heroTitle">Premier <span>atelier</span> de formation</h1>
+    <p class="tagline" data-i18n="tagline">Nautile Academy 1</p>
+    <h1 data-i18n="heroTitle">Création de <span>contenu</span></h1>
+    <p class="workshop-subtitle">Photo · Cadrage &amp; Montage</p>
+    <div class="event-meta-row">
+      
+      <span class="event-meta-item"><i class="fa-regular fa-clock" aria-hidden="true"></i> 09h00</span>
+      <span class="event-meta-item"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Fidrosse, Escale des Pêcheurs</span>
+    </div>
     <div class="ring-rule"></div>
     <p data-i18n="introOne">Nautile Academy est le programme de formation du Club Rotaract Satellite de Cotonou « Le Nautile Connect ». Il accompagne les jeunes de Cotonou dans l'acquisition de compétences concrètes, portées par l'esprit de service et de connexion qui anime le club.</p>
     <p data-i18n="introTwo">Ce premier atelier ouvre le cycle de formations. Les places sont limitées : l'inscription se fait en remplissant la fiche ci-contre et en réglant les frais de participation.</p>
@@ -124,7 +130,7 @@
 
     <div class="pay-card">
       <div class="label" data-i18n="feeLabel">Frais de participation</div>
-      <div class="amount-row"><div class="amount">5 125 FCFA</div><img class="momo-logo" src="logo_momo.webp" alt="Mobile Money"></div>
+      <div class="amount-row"><div class="amount">5 000 F</div><img class="momo-logo" src="logo_momo.webp" alt="Mobile Money"></div>
       <div class="row"><span>À verser au</span><button type="button" class="copy-phone" data-copy="0162617627" aria-label="Copier le numéro de paiement"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="11" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg><span>01 62 61 76 27</span></button></div>
       <div class="row"><span data-i18n="recipientLabel">Nom du destinataire</span><span>BOGNON Dona Gracias Yeratel</span></div>
     </div>
@@ -156,28 +162,29 @@
 
       <div class="field">
         <label for="classification" data-i18n="classificationLabel">Classification <span class="req">*</span></label>
-        <select id="classification" name="classification" required>
-          <option value="" disabled selected data-i18n="selectProfile">Sélectionnez votre profil</option>
-          <option value="Elève" data-i18n="student">Élève</option>
-          <option value="Etudiant" data-i18n="universityStudent">Étudiant(e)</option>
-          <option value="Professionnel" data-i18n="professional">Professionnel(le) en activité</option>
-          <option value="Entrepreneur" data-i18n="entrepreneur">Entrepreneur(se)</option>
-          <option value="Rotaractien" data-i18n="rotaryMember">Membre Rotaract / Rotary</option>
-          <option value="Autre" data-i18n="other">Autre</option>
-        </select>
+        <input type="text" id="classification" name="classification" placeholder="Ex : Étudiant(e), Professionnel(le), Entrepreneur(se)…" required>
         <div class="error-msg" data-error-for="classification"></div>
       </div>
 
-      <div class="field conditional-field" id="clubField" hidden>
-        <label for="clubName" data-i18n="clubLabel">Nom de votre club <span class="req">*</span></label>
-        <input type="text" id="clubName" name="clubName" placeholder="Ex : Rotaract Club de Cotonou">
-        <div class="error-msg" data-error-for="clubName"></div>
+      <div class="field">
+        <label data-i18n="clubMemberLabel">Faites-vous partie d'un club ? <span class="req">*</span></label>
+        <div class="radio-group" role="group" aria-labelledby="clubMemberLabel">
+          <label class="radio-option">
+            <input type="radio" name="clubMember" value="oui" id="clubMemberYes">
+            <span data-i18n="yes">Oui</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="clubMember" value="non" id="clubMemberNo">
+            <span data-i18n="no">Non</span>
+          </label>
+        </div>
+        <div class="error-msg" data-error-for="clubMember"></div>
       </div>
 
-      <div class="field conditional-field" id="otherField" hidden>
-        <label for="otherProfile" data-i18n="otherProfileLabel">Précisez votre profil <span class="req">*</span></label>
-        <input type="text" id="otherProfile" name="otherProfile" placeholder="Ex : Bénévole, association...">
-        <div class="error-msg" data-error-for="otherProfile"></div>
+      <div class="field conditional-field" id="clubField" hidden>
+        <label for="clubName" data-i18n="clubLabel">Nom du club <span class="req">*</span></label>
+        <input type="text" id="clubName" name="clubName" placeholder="Ex : Rotaract Club de Cotonou">
+        <div class="error-msg" data-error-for="clubName"></div>
       </div>
 
       <div class="field">
@@ -206,7 +213,7 @@
       </div>
       <div class="step-payment-card">
         <span class="payment-eyebrow" data-i18n="amountLabel">Montant à régler</span>
-        <div class="step-amount-row"><strong>5 125 FCFA</strong><img class="momo-logo" src="logo_momo.webp" alt="Mobile Money"></div>
+        <div class="step-amount-row"><strong>5 000 F</strong><img class="momo-logo" src="logo_momo.webp" alt="Mobile Money"></div>
         <span>À verser au <button type="button" class="copy-phone step-copy-phone" data-copy="0162617627" aria-label="Copier le numéro de paiement"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="11" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg><span>01 62 61 76 27</span></button></span>
         <span>Nom du destinataire : <b>BOGNON Dona Gracias Yeratel</b></span>
       </div>
@@ -272,12 +279,12 @@
     <h2 id="location-title" data-i18n="locationTitle">Retrouvez-nous facilement</h2>
     <div class="map-frame">
       <iframe
-        title="Carte de Cotonou"
-        src="https://www.google.com/maps?q=Cotonou%2C%20B%C3%A9nin&amp;output=embed"
+        title="Escale des Pêcheurs, Fidrosse, Cotonou"
+        src="https://www.google.com/maps?q=Escale+des+P%C3%AAcheurs+Fidrosse+Cotonou+B%C3%A9nin&output=embed"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
-    <a class="maps-link" href="https://www.google.com/maps/search/?api=1&amp;query=Cotonou%2C%20B%C3%A9nin" target="_blank" rel="noopener" data-i18n="openMaps">Ouvrir dans Google Maps ↗</a>
+    <a class="maps-link" href="https://www.google.com/maps/search/?api=1&amp;query=Escale+des+P%C3%AAcheurs+Fidrosse+Cotonou" target="_blank" rel="noopener" data-i18n="openMaps">Ouvrir dans Google Maps ↗</a>
   </div>
 </section>
 

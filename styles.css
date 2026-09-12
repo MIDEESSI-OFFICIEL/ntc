@@ -118,6 +118,34 @@
   }
   .info p{ color: var(--ink-soft); font-size: 15px; margin: 0 0 22px; max-width: 46ch; }
 
+  .workshop-subtitle{
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--teal);
+    letter-spacing: .04em;
+    margin: -16px 0 14px;
+    text-transform: uppercase;
+  }
+  .event-meta-row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin: 0 0 18px;
+  }
+  .event-meta-item{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 5px 12px;
+  }
+  .event-meta-item i{ color: var(--pink); font-size: 12px; }
+
   .info > .tagline,
   .info > h1,
   .info > .ring-rule,
@@ -253,6 +281,26 @@
   .step-copy-phone svg{ width: 14px; height: 14px; vertical-align: -2px; }
   .confirm-payment{ display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--ink-soft); cursor: pointer; }
   .confirm-payment input{ width: 18px; height: 18px; accent-color: var(--teal); flex-shrink: 0; }
+
+  .radio-group{ display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+  .radio-option{
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 18px;
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    transition: border-color .18s, color .18s, background .18s;
+    user-select: none;
+  }
+  .radio-option:has(input:checked){
+    border-color: var(--teal);
+    color: var(--teal);
+    background: rgba(18,171,163,0.06);
+  }
+  .radio-option input[type="radio"]{ accent-color: var(--teal); width: 16px; height: 16px; }
 
   .field{ margin-bottom: 20px; }
   .conditional-field[hidden]{ display: none; }
