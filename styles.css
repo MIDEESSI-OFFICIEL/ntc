@@ -77,6 +77,10 @@
       padding: 28px 5vw 40px;
     }
     .mobile-back{ display: inline-flex; border: none; padding: 0; margin-bottom: 18px; background: none; color: var(--ink-soft); font: 500 13px 'Poppins', sans-serif; cursor: pointer; }
+    /* Empêche le zoom automatique iOS sur focus des champs */
+    input[type=text], input[type=email], input[type=tel], select, textarea{
+      font-size: 16px;
+    }
   }
 
   /* LEFT — editorial info column */
@@ -364,7 +368,7 @@
     .drop{ padding: 18px 10px; }
     .drop .sub-txt{ font-size: 11px; }
     .preview .fname{ font-size: 12px; }
-    input[type=text], input[type=email], input[type=tel], select, textarea{ font-size: 14px; padding: 11px 12px; }
+    input[type=text], input[type=email], input[type=tel], select, textarea{ padding: 11px 12px; }
     .location-section, .partners-section{ margin-top: 30px; }
     .map-frame iframe{ height: 180px; }
     .partners-strip{ gap: 10px; padding: 12px 10px; }
