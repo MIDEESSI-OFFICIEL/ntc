@@ -13,7 +13,7 @@
     --error: #D8395C;
   }
   *{ box-sizing: border-box; }
-  html,body{ margin:0; padding:0; }
+  html,body{ margin:0; padding:0; overflow-x: hidden; }
   body{
     font-family: 'Poppins', sans-serif;
     background: var(--bg);
@@ -66,7 +66,16 @@
     .start-btn{ display: inline-flex; align-items: center; justify-content: center; width: 100%; margin-top: 24px; padding: 14px 20px; border: none; border-radius: 12px; color: #fff; background: var(--pink); font: 600 15px 'Poppins', sans-serif; cursor: pointer; }
     .panel{ display: none; }
     body.registration-open .info{ display: none; }
-    body.registration-open .panel{ display: block; }
+    body.registration-open .panel{
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      padding: 28px 5vw 40px;
+    }
     .mobile-back{ display: inline-flex; border: none; padding: 0; margin-bottom: 18px; background: none; color: var(--ink-soft); font: 500 13px 'Poppins', sans-serif; cursor: pointer; }
   }
 
@@ -111,6 +120,23 @@
     font-weight: 500;
     margin: 0 0 28px;
   }
+  .event-meta-row{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 20px;
+    margin: 0 0 20px;
+  }
+  .event-meta-item{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .event-meta-item i{ color: var(--teal); font-size: 13px; }
   .ring-rule{
     width: 54px; height: 4px; border-radius: 4px;
     background: linear-gradient(90deg, var(--teal), var(--blue-mid));
@@ -126,25 +152,6 @@
     margin: -16px 0 14px;
     text-transform: uppercase;
   }
-  .event-meta-row{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 20px;
-    margin: 0 0 18px;
-  }
-  .event-meta-item{
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--ink-soft);
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 5px 12px;
-  }
-  .event-meta-item i{ color: var(--pink); font-size: 12px; }
 
   .info > .tagline,
   .info > h1,
@@ -343,11 +350,21 @@
     header.top{ padding: 20px 5vw 18px; gap: 16px; }
     .rnlc-logo{ max-width: 112px; transform: scale(1.25); }
     .fanion-logo{ width: 48px; height: 48px; }
-    .panel{ padding: 26px 18px 24px; border-radius: 16px; }
+    .panel{ padding: 24px 16px 28px; border-radius: 14px; }
+    body.registration-open .panel{ padding: 22px 4vw 36px; }
+    .stepper{ gap: 0; }
     .stepper-item strong{ display: none; }
-    .stepper-line{ margin: 0 7px; }
+    .stepper-item span{ width: 24px; height: 24px; font-size: 11px; }
+    .stepper-line{ margin: 0 5px; min-width: 8px; }
     .step-actions{ gap: 8px; }
-    .back-step{ padding-left: 12px; padding-right: 12px; }
+    .back-step{ padding-left: 12px; padding-right: 12px; flex-shrink: 0; }
+    .step-btn, .submit-btn{ font-size: 14px; padding: 12px 14px; }
+    .step-payment-card{ padding: 16px 14px; word-break: break-word; }
+    .step-amount-row strong{ font-size: 24px; }
+    .drop{ padding: 18px 10px; }
+    .drop .sub-txt{ font-size: 11px; }
+    .preview .fname{ font-size: 12px; }
+    input[type=text], input[type=email], input[type=tel], select, textarea{ font-size: 14px; padding: 11px 12px; }
     .location-section, .partners-section{ margin-top: 30px; }
     .map-frame iframe{ height: 180px; }
     .partners-strip{ gap: 10px; padding: 12px 10px; }
