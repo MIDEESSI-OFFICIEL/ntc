@@ -29,7 +29,21 @@
   });
 
   function updatePhonePlaceholder(){
-    whatsappInput.placeholder = phoneInput.getPlaceholder() || 'Numéro de téléphone';
+    try {
+      const country = phoneInput.getSelectedCountryData();
+      if(window.intlTelInputUtils && country && country.iso2){
+        const ph = intlTelInputUtils.getExampleNumber(
+          country.iso2, true, intlTelInputUtils.numberType.MOBILE
+        );
+        whatsappInput.placeholder = ph || '+229 01 XX XX XX XX';
+      } else if(typeof phoneInput.getPlaceholder === 'function'){
+        whatsappInput.placeholder = phoneInput.getPlaceholder() || '+229 01 XX XX XX XX';
+      } else {
+        whatsappInput.placeholder = '+229 01 XX XX XX XX';
+      }
+    } catch(err){
+      whatsappInput.placeholder = '+229 01 XX XX XX XX';
+    }
   }
 
   whatsappInput.addEventListener('countrychange', updatePhonePlaceholder);
@@ -395,8 +409,9 @@
     return true;
   }
 
-  ['fullname','classification','email','whatsapp','motivation','clubName','otherProfile'].forEach(name => {
+  ['fullname','classification','email','whatsapp','motivation','clubName'].forEach(name => {
     const el = form.elements[name];
+    if(!el) return;
     el.addEventListener('blur', () => validateField(el));
     el.addEventListener('input', () => { if(el.getAttribute('data-touched')) validateField(el); });
   });
@@ -500,10 +515,9 @@
       ['Nom et prénoms', data.fullname],
       ['Classification', data.classification],
       ['Club', data.clubName || 'Non concerné'],
-      ['Autre profil', data.otherProfile || 'Non concerné'],
       ['E-mail', data.email],
       ['WhatsApp', data.whatsapp],
-      ['Preuve jointe', uploadedUrl ? 'Envoyée ✓' : (selectedFile ? 'En attente d\'envoi' : 'Non jointe')]
+      ['Preuve jointe', uploadedUrl ? 'Envoyée ✓' : 'Non jointe']
     ];
     recapBox.innerHTML = recapRows.map(([k,v]) => '<div><span>'+k+'</span><span>'+v+'</span></div>').join('');
 
@@ -512,7 +526,6 @@
       'Nom et prénoms : ' + data.fullname + '\n' +
       'Classification : ' + data.classification + '\n' +
       'Club : ' + (data.clubName || 'Non concerné') + '\n' +
-      'Autre profil : ' + (data.otherProfile || 'Non concerné') + '\n' +
       'E-mail : ' + data.email + '\n' +
       'WhatsApp : ' + data.whatsapp + '\n' +
       'Motivation : ' + data.motivation + '\n' +
