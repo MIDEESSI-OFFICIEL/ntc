@@ -4,6 +4,7 @@
   const EMAILJS_PUBLIC_KEY = '4iGVlNFEdP_AymO2p';
   const EMAILJS_SERVICE_ID = 'service_cwur66d';
   const EMAILJS_TEMPLATE_ID = 'template_w9xsrks';
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mzebqqol';
 
   const form = document.getElementById('inscriptionForm');
   emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
@@ -416,6 +417,27 @@
     el.addEventListener('input', () => { if(el.getAttribute('data-touched')) validateField(el); });
   });
 
+  // ── Formspree : notification e-mail au club ────────────────────────────────
+  function sendToFormspree(data, proofUrl) {
+    const body = new URLSearchParams({
+      'Nom et prénoms'    : data.fullname,
+      'Classification'    : data.classification,
+      'Membre d\'un club' : data.clubMember,
+      'Nom du club'       : data.clubMember === 'Oui' ? data.clubName : '—',
+      'E-mail'            : data.email,
+      'WhatsApp'          : data.whatsapp,
+      'Motivation'        : data.motivation,
+      'Preuve de paiement': proofUrl || 'Non jointe',
+      '_subject'          : 'Nouvelle inscription — Nautile Academy 1'
+    });
+    fetch(FORMSPREE_ENDPOINT, {
+      method : 'POST',
+      headers: { 'Accept': 'application/json' },
+      body   : body
+    }).catch(() => { /* silencieux — EmailJS reste le canal principal */ });
+  }
+  // ──────────────────────────────────────────────────────────────────────────
+
   form.addEventListener('submit', async function(e){
     e.preventDefault();
     if(uploading){
@@ -497,6 +519,7 @@
       reply_to: data.email
     })
     .then(() => {
+      sendToFormspree(data, uploadedUrl);
       submitBtn.disabled = false;
       submitBtn.textContent = languageText('Envoyer mon inscription', 'Submit my registration');
       showSuccess(data);
