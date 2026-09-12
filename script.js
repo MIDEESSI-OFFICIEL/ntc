@@ -35,14 +35,14 @@
         const ph = intlTelInputUtils.getExampleNumber(
           country.iso2, true, intlTelInputUtils.numberType.MOBILE
         );
-        whatsappInput.placeholder = ph || '+229 01 XX XX XX XX';
+        whatsappInput.placeholder = ph || '01 XX XX XX XX';
       } else if(typeof phoneInput.getPlaceholder === 'function'){
-        whatsappInput.placeholder = phoneInput.getPlaceholder() || '+229 01 XX XX XX XX';
+        whatsappInput.placeholder = phoneInput.getPlaceholder() || '01 XX XX XX XX';
       } else {
-        whatsappInput.placeholder = '+229 01 XX XX XX XX';
+        whatsappInput.placeholder = '01 XX XX XX XX';
       }
     } catch(err){
-      whatsappInput.placeholder = '+229 01 XX XX XX XX';
+      whatsappInput.placeholder = '01 XX XX XX XX';
     }
   }
 
