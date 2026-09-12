@@ -411,8 +411,8 @@
     ['fullname','classification','email','whatsapp','motivation'].forEach(name => {
       if(!validateField(form.elements[name])) valid = false;
     });
-    if(classificationInput.value === 'Rotaractien' && !validateField(clubNameInput)) valid = false;
-    if(classificationInput.value === 'Autre' && !validateField(otherProfileInput)) valid = false;
+    const clubMemberChecked = document.querySelector('input[name="clubMember"]:checked');
+    if(clubMemberChecked && clubMemberChecked.value === 'oui' && !validateField(clubNameInput)) valid = false;
     if(!valid) return;
     if(!validateStep(2)){
       goToStep(2);
@@ -439,7 +439,7 @@
 
     const isEnglish = (localStorage.getItem('nautile-language') || 'fr') === 'en';
     const confirmation = await Swal.fire({
-      title: isEnglish ? 'Confirm submission?' : 'Confirmer l’envoi ?',
+      title: isEnglish ? 'Confirm submission?' : 'Confirmer l\'envoi ?',
       text: isEnglish ? 'Your registration will be sent to Nautile Academy.' : 'Votre inscription sera transmise à Nautile Academy.',
       icon: 'question',
       showCancelButton: true,
