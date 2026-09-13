@@ -197,6 +197,35 @@
   }
   .info h1 span{ color: var(--teal); }
 
+  /* ═══════════════════════════════════════════
+     PAGE CONFIRMATION DE PRESENCE
+  ═══════════════════════════════════════════ */
+  .presence-main{ grid-template-columns: .9fr 1.1fr; align-items: center; }
+  .presence-intro{ padding: 18px 0; }
+  .presence-kicker{ color: var(--pink); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 12px; }
+  .presence-intro h1{ font-size: clamp(34px, 5vw, 62px); line-height: 1.08; margin: 0 0 26px; }
+  .presence-intro h1 span{ color: var(--pink); }
+  .presence-intro p{ max-width: 45ch; }
+  .presence-note{ color: var(--pink) !important; font-weight: 600; }
+  .presence-event-card{ display: grid; gap: 13px; margin: 0 0 28px; padding: 22px 24px; border-left: 4px solid var(--pink); background: rgba(255,255,255,.74); box-shadow: 0 18px 38px -28px rgba(11,61,145,.35); }
+  .presence-event-card div{ display: flex; align-items: center; gap: 12px; color: var(--ink-soft); font-size: 14px; }
+  .presence-event-card i{ width: 20px; color: var(--blue-mid); text-align: center; }
+  .presence-event-card strong{ color: var(--ink); font-weight: 700; }
+  .presence-panel{ max-width: 620px; justify-self: end; }
+  .presence-panel .optional{ color: var(--ink-soft); font-size: 11px; font-weight: 400; }
+  .presence-panel .submit-btn i{ margin-right: 7px; }
+  .presence-event-link{ margin: 0 0 10px; }
+  @media (max-width: 880px){
+    .presence-main{ grid-template-columns: 1fr; padding: 32px 5vw 60px; }
+    .presence-intro{ padding: 0; }
+    .presence-panel{ max-width: none; justify-self: stretch; display: block; width: 100%; border-radius: 24px; padding: 32px 6vw 36px; }
+  }
+  @media (max-width: 520px){
+    .presence-main{ padding: 24px 4vw 48px; }
+    .presence-panel{ padding: 24px 4vw 30px; }
+    .presence-event-card{ padding: 18px; }
+  }
+
   .academy-date-card{
     width: fit-content; margin: 0 0 28px auto;
     padding: 14px 20px; border-radius: 14px;

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Validez votre présence pendant la réunion statutaire des Clubs Rotaract de Cotonou le Nautile et Satellite.">
+<meta name="theme-color" content="#0B3D91">
+<link rel="icon" type="image/webp" href="ntc_logo_fanion.webp">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/css/intlTelInput.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+<title>Réunion statutaire | Feuille de présence</title>
+</head>
+<body class="presence-page">
+<div class="sky"></div>
+
+<header class="top">
+  <img class="top-logo rnlc-logo" src="rnlc_logo.webp" alt="Logo Rotaract Nautile Connect">
+  <img class="top-logo fanion-logo" src="ntc_logo_fanion.webp" alt="Fanion NTC">
+  <div class="language-switcher" role="group" aria-label="Sélecteur de langue">
+    <button type="button" class="language-btn active" data-language="fr">FR</button>
+    <button type="button" class="language-btn" data-language="en">EN</button>
+  </div>
+</header>
+
+<main class="presence-main">
+  <section class="presence-intro">
+    <div class="presence-kicker">Clubs Rotaract de Cotonou</div>
+    <h1>Réunion <span>statutaire</span></h1>
+    <div class="presence-event-card">
+      <div><i class="fa-regular fa-calendar" aria-hidden="true"></i><strong>14 septembre 2026</strong></div>
+      <div><i class="fa-regular fa-clock" aria-hidden="true"></i><span>À partir de 19h30</span></div>
+      <div><i class="fa-solid fa-video" aria-hidden="true"></i><span>Réunion en ligne</span></div>
+    </div>
+    <div class="ring-rule"></div>
+      <p>Merci d’enregistrer votre présence à cette réunion statutaire des Clubs Rotaract de Cotonou le Nautile et Satellite.</p>
+    <p class="presence-note">Cette fiche est à remplir pendant la réunion pour valider votre présence.</p>
+  </section>
+
+  <section class="panel presence-panel">
+    <form id="presenceForm" novalidate>
+      <h2>Feuille de présence</h2>
+      <p class="sub">Remplissez cette fiche pendant la réunion afin d’enregistrer votre présence.</p>
+
+      <div class="field">
+        <label for="fullname">Noms et prénoms <span class="req">*</span></label>
+        <input type="text" id="fullname" name="fullname" placeholder="Ex : BOGNON Dona Gracias Yeratel" required>
+        <div class="error-msg" data-error-for="fullname"></div>
+      </div>
+
+      <div class="field">
+        <label for="classification">Classification <span class="req">*</span></label>
+        <input type="text" id="classification" name="classification" placeholder="Ex : Développeur web, Étudiant(e)…" required>
+        <div class="error-msg" data-error-for="classification"></div>
+      </div>
+
+      <div class="field">
+        <label>Faites-vous partie d'un club ? <span class="req">*</span></label>
+        <div class="radio-group" role="group">
+          <label class="radio-option"><input type="radio" name="clubMember" value="Oui"><span>Oui</span></label>
+          <label class="radio-option"><input type="radio" name="clubMember" value="Non"><span>Non</span></label>
+        </div>
+        <div class="error-msg" data-error-for="clubMember"></div>
+      </div>
+
+      <div class="field conditional-field" id="clubField" hidden>
+        <label for="clubName">Nom du club <span class="req">*</span></label>
+        <input type="text" id="clubName" name="clubName" placeholder="Ex : Rotaract Club de Cotonou">
+        <div class="error-msg" data-error-for="clubName"></div>
+      </div>
+
+      <div class="field grid2">
+        <div>
+          <label for="email">Adresse e-mail <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="vous@exemple.com" required>
+          <div class="error-msg" data-error-for="email"></div>
+        </div>
+        <div>
+          <label for="whatsapp">Numéro WhatsApp <span class="req">*</span></label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="01 XX XX XX XX" required>
+          <div class="error-msg" data-error-for="whatsapp"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="message">Message ou observation <span class="optional">(facultatif)</span></label>
+        <textarea id="message" name="message" placeholder="Une précision à nous communiquer ?"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitPresence"><i class="fa-solid fa-check" aria-hidden="true"></i> Valider ma présence</button>
+      <p class="form-note">Aucun paiement ni justificatif n'est demandé pour cette validation.</p>
+    </form>
+
+    <div class="success" id="presenceSuccess">
+      <div class="check"><svg fill="none" stroke="#fff" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div>
+      <h2>Vous êtes invité(e) à l’événement</h2>
+      <p>Merci, votre présence a bien été enregistrée. Nous vous invitons à participer à la réunion statutaire du 14 septembre 2026 à 19h30, en ligne.</p>
+      <div class="recap" id="presenceRecap"></div>
+      <a class="wa-btn presence-event-link" href="index.html">Voir l’événement sur la page principale</a>
+      <button type="button" class="new-btn" id="resetPresence">Modifier ma réponse</button>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-bottom">© 2026 Club Rotaract Satellite de Cotonou — Le Nautile Connect. Tous droits réservés.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/intlTelInput.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="presence.js"></script>
+</body>
+</html>
