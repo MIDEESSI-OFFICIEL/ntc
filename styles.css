@@ -215,6 +215,11 @@
   .presence-panel .optional{ color: var(--ink-soft); font-size: 11px; font-weight: 400; }
   .presence-panel .submit-btn i{ margin-right: 7px; }
   .presence-event-link{ margin: 0 0 10px; }
+  .presence-page .grid2{ align-items: start; }
+  .presence-page .iti{ min-width: 0; }
+  .presence-page .iti__selected-country{ min-width: 0; }
+  .presence-page .iti__selected-dial-code{ margin-left: 4px; }
+  .presence-page .iti input[type=tel]{ padding-left: 86px; }
   @media (max-width: 880px){
     .presence-main{ grid-template-columns: 1fr; padding: 32px 5vw 60px; }
     .presence-intro{ padding: 0; }
@@ -224,6 +229,11 @@
     .presence-main{ padding: 24px 4vw 48px; }
     .presence-panel{ padding: 24px 4vw 30px; }
     .presence-event-card{ padding: 18px; }
+    .presence-page .grid2{ grid-template-columns: 1fr; gap: 0; }
+    .presence-page .grid2 > div{ margin-bottom: 20px; min-width: 0; }
+    .presence-page .grid2 > div:last-child{ margin-bottom: 0; }
+    .presence-page .iti__selected-country{ padding: 0 7px 0 8px; }
+    .presence-page .iti input[type=tel]{ padding-left: 82px; }
   }
 
   .academy-date-card{

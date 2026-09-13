@@ -12,6 +12,65 @@
     loadUtils: () => import('https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/utils.js')
   });
 
+  const translations = {
+    fr: {
+      pageTitle: 'Réunion statutaire | Feuille de présence',
+      pageDescription: 'Validez votre présence pendant la réunion statutaire des Clubs Rotaract de Cotonou le Nautile et Satellite.',
+      kicker: 'Clubs Rotaract de Cotonou', heroTitle: 'Réunion <span>statutaire</span>',
+      eventDate: '14 septembre 2026', eventTime: 'À partir de 19h30', eventMode: 'Réunion en ligne',
+      intro: 'Merci d’enregistrer votre présence à cette réunion statutaire des Clubs Rotaract de Cotonou le Nautile et Satellite.',
+      note: 'Cette fiche est à remplir pendant la réunion pour valider votre présence.', formTitle: 'Feuille de présence',
+      formSubtitle: 'Remplissez cette fiche pendant la réunion afin d’enregistrer votre présence.',
+      fullnameLabel: 'Noms et prénoms <span class="req">*</span>', classificationLabel: 'Classification <span class="req">*</span>',
+      clubMemberLabel: 'Faites-vous partie d\'un club ? <span class="req">*</span>', yes: 'Oui', no: 'Non',
+      clubNameLabel: 'Nom du club <span class="req">*</span>', emailLabel: 'Adresse e-mail <span class="req">*</span>',
+      whatsappLabel: 'Numéro WhatsApp <span class="req">*</span>', messageLabel: 'Message ou observation <span class="optional">(facultatif)</span>',
+      submit: 'Valider ma présence', formNote: 'Aucun paiement ni justificatif n\'est demandé pour cette validation.',
+      successTitle: 'Vous êtes invité(e) à l’événement', successText: 'Merci, votre présence a bien été enregistrée. Nous vous invitons à participer à la réunion statutaire du 14 septembre 2026 à 19h30, en ligne.',
+      eventLink: 'Voir l’événement sur la page principale', reset: 'Modifier ma réponse',
+      fullnamePlaceholder: 'Ex : BOGNON Dona Gracias Yeratel', classificationPlaceholder: 'Ex : Développeur web, Étudiant(e)…',
+      clubPlaceholder: 'Ex : Rotaract Club de Cotonou', emailPlaceholder: 'vous@exemple.com', messagePlaceholder: 'Une précision à nous communiquer ?'
+    },
+    en: {
+      pageTitle: 'Statutory Meeting | Attendance Sheet',
+      pageDescription: 'Record your attendance during the statutory meeting of the Rotaract Clubs of Cotonou Nautile and Satellite.',
+      kicker: 'Rotaract Clubs of Cotonou', heroTitle: 'Statutory <span>meeting</span>',
+      eventDate: 'September 14, 2026', eventTime: 'From 7:30 PM', eventMode: 'Online meeting',
+      intro: 'Please record your attendance at this statutory meeting of the Rotaract Clubs of Cotonou Nautile and Satellite.',
+      note: 'This sheet must be completed during the meeting to validate your attendance.', formTitle: 'Attendance sheet',
+      formSubtitle: 'Complete this form during the meeting to record your attendance.',
+      fullnameLabel: 'Full name <span class="req">*</span>', classificationLabel: 'Profile <span class="req">*</span>',
+      clubMemberLabel: 'Are you a member of a club? <span class="req">*</span>', yes: 'Yes', no: 'No',
+      clubNameLabel: 'Club name <span class="req">*</span>', emailLabel: 'Email address <span class="req">*</span>',
+      whatsappLabel: 'WhatsApp number <span class="req">*</span>', messageLabel: 'Message or note <span class="optional">(optional)</span>',
+      submit: 'Validate my attendance', formNote: 'No payment or proof is required for this validation.',
+      successTitle: 'You are invited to the event', successText: 'Thank you, your attendance has been recorded. We invite you to join the statutory meeting on September 14, 2026 at 7:30 PM, online.',
+      eventLink: 'View the event on the main page', reset: 'Change my response',
+      fullnamePlaceholder: 'E.g. BOGNON Dona Gracias Yeratel', classificationPlaceholder: 'E.g. Web developer, Student…',
+      clubPlaceholder: 'E.g. Rotaract Club of Cotonou', emailPlaceholder: 'you@example.com', messagePlaceholder: 'Anything you would like to tell us?'
+    }
+  };
+
+  function applyLanguage(language){
+    const dictionary = translations[language] || translations.fr;
+    document.documentElement.lang = language;
+    document.title = dictionary.pageTitle;
+    document.querySelector('meta[name="description"]').setAttribute('content', dictionary.pageDescription);
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+      element.innerHTML = dictionary[element.dataset.i18n] || element.innerHTML;
+    });
+    const placeholders = {
+      fullname: dictionary.fullnamePlaceholder, classification: dictionary.classificationPlaceholder,
+      clubName: dictionary.clubPlaceholder, email: dictionary.emailPlaceholder, message: dictionary.messagePlaceholder
+    };
+    Object.entries(placeholders).forEach(([name, value]) => { form.elements[name].placeholder = value; });
+    document.querySelectorAll('.language-btn').forEach(button => button.classList.toggle('active', button.dataset.language === language));
+    localStorage.setItem('nautile-language', language);
+  }
+
+  document.querySelectorAll('.language-btn').forEach(button => button.addEventListener('click', () => applyLanguage(button.dataset.language)));
+  applyLanguage(localStorage.getItem('nautile-language') || 'fr');
+
   function setError(field, message){
     const element = document.querySelector('[data-error-for="' + field + '"]');
     if(element) element.textContent = message;
